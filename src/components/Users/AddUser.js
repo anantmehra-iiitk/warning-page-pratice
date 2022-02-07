@@ -2,7 +2,7 @@ import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 import ErrorWarning from "../UI/ErrorWarning";
 import Button from "../UI/Button";
-import { useState } from "react";
+import React, { useState, Fragment} from "react";
 
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
@@ -49,7 +49,7 @@ const AddUser = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
       {error && (
         <ErrorWarning
           title={error.title}
@@ -76,7 +76,7 @@ const AddUser = (props) => {
           <Button type="submit"> Add User</Button>
         </form>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 

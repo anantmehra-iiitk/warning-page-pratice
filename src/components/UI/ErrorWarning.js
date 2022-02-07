@@ -1,8 +1,14 @@
 import Card from "./Card";
 import classes from "./ErrorWarning.module.css";
-
+import ReactDOM from "react-dom";
+import React from "react";
 import Button from "./Button";
-const ErrorWarning = (props) => {
+
+const Backdrop = (props) => {
+  return <div className={classes.backdrop} onClick={props.onConfirm} />;
+};
+
+const WarningOverlay = (props) => {
   return (
     <div className={classes.backdrop} onClick={props.onConfirm}>
       <Card className={classes.warning}>
@@ -17,6 +23,26 @@ const ErrorWarning = (props) => {
         </footer>
       </Card>
     </div>
+  );
+};
+
+const ErrorWarning = (props) => {
+  return (
+    <React.Fragment>
+      {ReactDOM.createPortal(
+        <Backdrop onClick={props.onConfirm} />,
+        document.getElementById("backdrop-root")
+      )}
+      {ReactDOM.createPortal(
+        <WarningOverlay
+          title={props.title}
+          message={props.messagr}
+          onConfirm={props.onConfirm}
+        />,
+        document.getElementById("overlay-root")
+
+      )}
+    </React.Fragment>
   );
 };
 
